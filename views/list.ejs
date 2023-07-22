@@ -1,0 +1,33 @@
+<%- include("header") -%>
+
+    <!-- <% if (listTitle === "Saturday" || listTitle === "Sunday") { %> --> <!-- '<% %>' is used to write Javascript code (flow-control). For each line,we need '<% %>'. -->
+        <!-- <h1 style="color: purple"><%= workItems %> ToDo List</h1> --> <!-- 'workItems' is a variable (as '<%= %>' is used) which takes the value from 'js_todolist.js' file. -->
+    <!-- <% } else { %>
+        <h1 style="color: blue"><%= listTitle %> ToDo List</h1>
+    <% } %> -->
+
+    <div class="box" id="heading">
+        <h1><%= listTitle %></h1> <!-- 'listTitle' is a variable (as '<%= %>' is used) which takes the value from 'js_todolist.js' file (server). -->
+    </div>
+    
+    <div class="box">        
+        <!-- <li>Buy Food</li>
+        <li>Cook Food</li>
+        <li>Eat Food</li> -->
+
+        <!-- <li><%= newListItems[0] %></li> -->
+        
+        <% for (let i = 0; i < newListItems.length; i++) { %> <!-- '<% %>' is used to write Javascript code. For each line, we need '<% %>'. -->
+            <div class="item">
+                <input type="checkbox">
+                <p><%= newListItems[i] %></p>
+            </div>            
+        <% } %>
+        
+        <form class="item" action="/" method="post"> <!-- When 'Add' button is clicked/sumitted (as type="submit"), as method="post", things in 'form' of 'list.ejs' web-page (as "post" request) is sent/posted to home route ("/") of server ('app' of 'js_todolist.js'). -->
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off"> <!-- autocomplete="off" - The texts entered earlier times, will not be shown as options. "New Item" is the text which will be shown inside the placeholder (input box) until we write something in it. -->
+            <button type="submit" name="list" value=<%= listTitle %>>+</button>
+        </form>
+    </div>    
+
+<%- include("footer") -%>
